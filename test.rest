@@ -16,3 +16,5 @@ content-type: application/json
   "email": "omar@gamil.com",
   "profile_image": "dfjk"
 }
+###
+GET    http://localhost:5000/api/users/omar@gamil.com HTTP/1.1

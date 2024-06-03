@@ -2,6 +2,26 @@ const User = require("../models/user.model");
 const AppError = require("../utils/app-error");
 const signJWT = require("../utils/sign-jwt");
 
+const getUser = async (req, res, next) => {
+  try {
+    const email = req.params.email;
+
+    const user = await User.findOne({ email });
+
+    if (!user) return next(new AppError("No user found", 400));
+
+    res.status(200).json({
+      success: true,
+      message: "User fetch successfully.",
+      data: {
+        user,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const createUser = async (req, res, next) => {
   try {
     console.log(req.body);
@@ -47,7 +67,7 @@ const updateUser = async (req, res, next) => {
       profile_image
     );
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "User updated successfully.",
       data: {
@@ -60,6 +80,7 @@ const updateUser = async (req, res, next) => {
 };
 
 module.exports = {
+  getUser,
   createUser,
   updateUser,
 };

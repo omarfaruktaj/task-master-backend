@@ -1,6 +1,6 @@
 const handleDevelopmentError = (err, _req, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
+  res.status(err.statusCode || 500).json({
+    status: err.status || "error",
     message: err.message,
     error: err,
     stack: err.stack,
@@ -9,8 +9,8 @@ const handleDevelopmentError = (err, _req, res) => {
 
 const handleProductionError = (err, _req, res) => {
   if (err.isOperational) {
-    return res.status(err.statusCode).json({
-      status: err.status,
+    return res.status(err.statusCode || 500).json({
+      status: err.status || "error",
       message: err.message,
     });
   }
@@ -23,12 +23,11 @@ const handleProductionError = (err, _req, res) => {
 
 module.exports = (error, req, res, next) => {
   const nodeEnv = process.env.NODE_ENV;
-  if (nodeEnv == "development") {
-    handleDevelopmentError(error, req, res);
-  } else if (nodeEnv == "production") {
-    let err = { ...error };
-    console.log(err);
 
+  if (nodeEnv === "development") {
+    handleDevelopmentError(error, req, res);
+  } else if (nodeEnv === "production") {
+    let err = { ...error };
     err.message = error.message;
     err.status = err.status || "error";
     err.statusCode = err.statusCode || 500;
