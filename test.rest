@@ -35,5 +35,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0Q
 }
 ###
 
+patch     http://localhost:5000/api/tasks/665d8d19782a2aa3dd2af0d3 HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
+
+{
+  "title":"my taskd",
+  "description":"this is my task Descriptiondfdfd"
+}
+###
+
 GET     http://localhost:5000/api/tasks HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
