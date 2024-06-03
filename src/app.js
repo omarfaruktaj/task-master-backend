@@ -2,10 +2,17 @@ const express = require("express");
 const cors = require("cors");
 const globalErrorHandler = require("./utils/global-error-handler");
 const AppError = require("./utils/app-error");
+const dotenv = require("dotenv");
+
+dotenv.config();
+const userRotes = require("./routes/user.route");
 
 const app = express();
 
 app.use(cors());
+app.use(express.json());
+
+app.use("/api", userRotes);
 
 app.get("/health", (req, res, next) => {
   res.status(200).json({

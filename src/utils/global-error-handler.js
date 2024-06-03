@@ -27,12 +27,12 @@ module.exports = (error, req, res, next) => {
     handleDevelopmentError(error, req, res);
   } else if (nodeEnv == "production") {
     let err = { ...error };
+    console.log(err);
 
     err.message = error.message;
     err.status = err.status || "error";
     err.statusCode = err.statusCode || 500;
 
-    if (error instanceof ZodError) err = handleZodError(error);
     handleProductionError(err, req, res);
   }
 };

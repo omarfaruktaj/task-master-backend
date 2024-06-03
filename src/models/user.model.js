@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const userSchema = mongoose.Schema(
   {
-    Name: {
+    name: {
       type: String,
       required: true,
     },
@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema(
       unique: true,
       required: true,
     },
-    profile: {
+    profile_image: {
       type: String,
     },
   },
