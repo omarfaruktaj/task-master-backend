@@ -3,18 +3,33 @@ content-type: application/json
 
 {
   "name": "omar faruk",
-  "email": "omar@gamil.com",
-  "profile_image": "dfjk"
+  "email": "omar5@gamil.com"
+  
 }
 ### 
 
-PATCH     http://localhost:5000/api/users/omar@gamil.com HTTP/1.1
+PATCH     http://localhost:5000/api/users/omar4@gamil.com HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
+
 
 {
   "name": "omar faruk1",
   "email": "omar@gamil.com",
-  "profile_image": "dfjk"
+  "profile_image": "dfjdfdfdfdfk"
 }
 ###
-GET    http://localhost:5000/api/users/omar@gamil.com HTTP/1.1
+GET    http://localhost:5000/api/users/omar1@gamil.com HTTP/1.1
+Authorization: Bearer 
+
+
+###
+
+POST     http://localhost:5000/api/tasks HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
+
+{
+  "title":"new Task",
+  "description":"this is my task Description"
+}

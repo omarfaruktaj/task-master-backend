@@ -8,7 +8,7 @@ const getUser = async (req, res, next) => {
 
     const user = await User.findOne({ email });
 
-    if (!user) return next(new AppError("No user found", 400));
+    if (!user) return next(new AppError("No user found", 404));
 
     res.status(200).json({
       success: true,
@@ -26,6 +26,9 @@ const createUser = async (req, res, next) => {
   try {
     console.log(req.body);
     const { name, email, profile_image } = req.body;
+
+    if (!name || !email)
+      return next(new AppError("name and email are required.", 400));
 
     console.log(name, email, profile_image);
 
@@ -52,20 +55,19 @@ const createUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   try {
-    const { name, profile_image } = req.body;
-
     const email = req.params.email;
+    const { name, profile_image } = req.body;
+    if (!name || !email)
+      return next(new AppError("name and email are required.", 400));
 
     const user = await User.findOne({ email });
 
     if (!user) return next(new AppError("No user found with this email", 400));
 
-    const updatedUser = await User.updateOne(
-      { email },
-      name,
-      email,
-      profile_image
-    );
+    user.name = name;
+    user.profile_image = profile_image;
+
+    const updatedUser = await user.save();
 
     res.status(200).json({
       success: true,

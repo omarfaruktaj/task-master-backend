@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 const userRotes = require("./routes/user.route");
+const taskRoutes = require("./routes/task.route");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", userRotes);
+app.use("/api", taskRoutes);
 
 app.get("/health", (req, res, next) => {
   res.status(200).json({
