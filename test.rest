@@ -29,8 +29,9 @@ POST     http://localhost:5000/api/tasks HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
 
+
 {
-  "title":"new Task",
+  "title":"omar tasks",
   "description":"this is my task Description"
 }
 ###
@@ -54,5 +55,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0Q
 }
 ###
 
-GET     http://localhost:5000/api/tasks HTTP/1.1
+GET    http://localhost:5000/api/tasks?status=Done HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
+###
+
+DELETE     http://localhost:5000/api/tasks/665dc2ce5f81fdb2136d0389 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI

@@ -1,6 +1,7 @@
 const AppError = require("../utils/app-error");
 const User = require("../models/user.model");
 const Task = require("../models/task.model");
+const ApiFeature = require("../utils/apiFeature");
 
 const createTask = async (req, res, next) => {
   try {
@@ -41,8 +42,8 @@ const updateTask = async (req, res, next) => {
     if (!title || !description)
       return next(new AppError("title and description are require. "));
 
-    const user = await User.findOne({ email });
-    if (!user) return next(new AppError("No user found", 404));
+    const task = await Task.findById(id);
+    if (!task) return next(new AppError("No task found", 404));
 
     const updatedTask = await Task.findOneAndUpdate(
       { _id: id },
@@ -68,8 +69,8 @@ const updateTaskStatus = async (req, res, next) => {
     const email = req.email;
     const id = req.params.id;
 
-    const user = await User.findOne({ email });
-    if (!user) return next(new AppError("No user found", 404));
+    const task = await Task.findById(id);
+    if (!task) return next(new AppError("No task found", 404));
 
     const updatedTask = await Task.findOneAndUpdate(
       { _id: id },
@@ -92,18 +93,39 @@ const updateTaskStatus = async (req, res, next) => {
 const getTasks = async (req, res, next) => {
   try {
     const email = req.email;
-
     const user = await User.findOne({ email });
     if (!user) return next(new AppError("No user found", 404));
 
-    const tasks = await Task.find({});
+    const features = new ApiFeature(Task.find({ user: user._id }), req.query)
+      .search("title")
+      .filter();
+
+    const tasks = await features.query;
 
     res.status(201).json({
       success: true,
-      message: "Task added successfully.",
+      message: "Task fetch successfully.",
       data: {
         tasks: tasks,
       },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteTask = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+
+    const task = await Task.findById(id);
+    if (!task) return next(new AppError("No task found", 404));
+
+    await Task.findByIdAndDelete(id);
+
+    res.status(201).json({
+      success: true,
+      message: "Task successfully deleted",
     });
   } catch (error) {
     next(error);
@@ -115,4 +137,5 @@ module.exports = {
   getTasks,
   updateTask,
   updateTaskStatus,
+  deleteTask,
 };
