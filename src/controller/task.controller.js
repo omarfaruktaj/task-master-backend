@@ -32,6 +32,28 @@ const createTask = async (req, res, next) => {
   }
 };
 
+const getTasks = async (req, res, next) => {
+  try {
+    const email = req.email;
+
+    const user = await User.findOne({ email });
+    if (!user) return next(new AppError("No user found", 404));
+
+    const tasks = await Task.find({});
+
+    res.status(201).json({
+      success: true,
+      message: "Task added successfully.",
+      data: {
+        tasks: tasks,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createTask,
+  getTasks,
 };
