@@ -1,0 +1,17 @@
+{
+  "name": "task-master",
+  "description": "A Ultimate Task Management Solution",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "author": "omar",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node --env-file=.env src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  }
+}
