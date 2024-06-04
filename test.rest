@@ -3,20 +3,40 @@ content-type: application/json
 
 {
   "name": "omar faruk",
-  "email": "omar5@gamil.com"
+  "email": "omar6@gamil.com"
+  
+}
+###
+POST    http://localhost:5000/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+  "name": "omar faruk",
+  "email": "omar6@gamil.com"
+  
+}
+###
+POST    http://localhost:5000/api/users/social HTTP/1.1
+content-type: application/json
+
+{
+  "name": "omar faruk",
+  "email": "omardd@gamil.com"
   
 }
 ### 
 
-PATCH     http://localhost:5000/api/users/omar4@gamil.com HTTP/1.1
+PATCH     https://task-master-vert-omega.vercel.app/api/users/omar6@gamil.com HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI2QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQ3NzkxMiwiZXhwIjoxNzE4MDgyNzEyfQ.xMYSTtAGw1GQ5T0tdi4egv0oX8Vbd4wNJK9ngV5iC1s
 
 
 {
+"user":{
   "name": "omar faruk1",
   "email": "omar@gamil.com",
   "profile_image": "dfjdfdfdfdfk"
+}
 }
 ###
 GET    http://localhost:5000/api/users/omar1@gamil.com HTTP/1.1
@@ -27,12 +47,13 @@ Authorization: Bearer
 
 POST     http://localhost:5000/api/tasks HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI2QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQ4MTk1MSwiZXhwIjoxNzE4MDg2NzUxfQ.3WvGCYS9PLjgQTyaSvZYyplkCZY9Kxm3W7BAtd9y5CE
 
 
 {
   "title":"omar tasks",
-  "description":"this is my task Description"
+  "description":"this is my task Description",
+  "status":"In Progress"
 }
 ###
 
@@ -55,8 +76,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0Q
 }
 ###
 
-GET    http://localhost:5000/api/tasks?status=Done HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI0QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQwNTIwMCwiZXhwIjoxNzE4MDEwMDAwfQ.tEEVr998RjaOXlNPOFaPoEh3FG8Ft_VjDifhcm8V3nI
+GET    http://localhost:5000/api/tasks HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI2QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQ4MTk1MSwiZXhwIjoxNzE4MDg2NzUxfQ.3WvGCYS9PLjgQTyaSvZYyplkCZY9Kxm3W7BAtd9y5CE
+###
+###
+
+GET    http://localhost:5000/api/tasks/count?status=In Progress HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI2QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQ4MTk1MSwiZXhwIjoxNzE4MDg2NzUxfQ.3WvGCYS9PLjgQTyaSvZYyplkCZY9Kxm3W7BAtd9y5CE
+###
+GET    http://localhost:5000/api/tasks/665eb1f6a78c685910913521 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9tYXI2QGdhbWlsLmNvbSIsImlhdCI6MTcxNzQ4MTk1MSwiZXhwIjoxNzE4MDg2NzUxfQ.3WvGCYS9PLjgQTyaSvZYyplkCZY9Kxm3W7BAtd9y5CE
 ###
 
 DELETE     http://localhost:5000/api/tasks/665dc2ce5f81fdb2136d0389 HTTP/1.1

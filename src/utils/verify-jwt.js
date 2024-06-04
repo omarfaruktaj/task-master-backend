@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const AppError = require("./app-error");
 
 const verifyJWT = (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
+  const token = req.headers.authorization.trim().split(" ")[1];
 
   if (!token) {
     return next(new AppError("No token provided", 401));
@@ -10,8 +10,9 @@ const verifyJWT = (req, res, next) => {
   const secret = process.env.JWT_SECRET;
   try {
     const decoded = jwt.verify(token, secret);
-    console.log(decoded);
+
     req.email = decoded.email;
+
     next();
   } catch (error) {
     return next(new AppError("Invalid token", 403));

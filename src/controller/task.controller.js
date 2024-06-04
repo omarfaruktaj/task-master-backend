@@ -114,6 +114,62 @@ const getTasks = async (req, res, next) => {
   }
 };
 
+const taskCountByStatus = async (req, res, next) => {
+  try {
+    const email = req.email;
+    const user = await User.findOne({ email });
+    if (!user) return next(new AppError("No user found", 404));
+
+    const totalTasks = await Task.countDocuments({ user: user._id });
+    const todoTasks = await Task.countDocuments({
+      user: user._id,
+      status: "To Do",
+    });
+    const inProgressTasks = await Task.countDocuments({
+      user: user._id,
+      status: "In Progress",
+    });
+    const doneTasks = await Task.countDocuments({
+      user: user._id,
+      status: "Done",
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "count successfully.",
+      data: {
+        totalTasks,
+        todoTasks,
+        inProgressTasks,
+        doneTasks,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getATask = async (req, res, next) => {
+  try {
+    const email = req.email;
+    const taskId = req.params.id;
+    const user = await User.findOne({ email });
+    if (!user) return next(new AppError("No user found", 404));
+
+    const task = await Task.findById(taskId);
+
+    res.status(200).json({
+      success: true,
+      message: "Task fetch successfully.",
+      data: {
+        task,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteTask = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -138,4 +194,6 @@ module.exports = {
   updateTask,
   updateTaskStatus,
   deleteTask,
+  getATask,
+  taskCountByStatus,
 };
